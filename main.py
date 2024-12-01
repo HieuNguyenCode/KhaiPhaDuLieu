@@ -10,7 +10,6 @@ def cot_1(values):
         '0' if ' ' in str(x) else ('-1' if len(str(x)) > 2 else '1')
     ))
 
-
 # chú ý: dấu – khách với dâu -
 def cot_2(values):
     def process_value(value):
@@ -46,7 +45,6 @@ def cot_2(values):
 
     return values.apply(process_value)
 
-
 def cot_3(values):
     def process_value(value):
         value = str(value)
@@ -69,7 +67,6 @@ def cot_3(values):
 
     return values.apply(process_value)
 
-
 def cot_4(values, result, check):
     def process_value(value):
         if len(value) != 0 and value not in check:
@@ -78,7 +75,6 @@ def cot_4(values, result, check):
         return value
 
     return values.apply(process_value)
-
 
 def cot_5(values):
     def process_value(value):
@@ -102,6 +98,8 @@ def cot_5(values):
 
 if __name__ == '__main__':
     df = pd.read_csv("file_nhieu.csv")
+
+    # df = df[df.isnull().sum(axis=1) < 5]
 
     for column in df.columns:
         df[column] = df[column].str.lower()
@@ -230,11 +228,5 @@ if __name__ == '__main__':
         df[
             'Bạn cảm nhận thế nào về chất lượng dịch vụ (chăm sóc khách hàng sau và trước bán hàng) của Việt Tiến so với nhãn hàng khác?'],
         ['rất tốt', 'Không sử dụng dịch vụ hậu mãi', 'tương đương', 'kém hơn'])
-
-    check = df[
-        "Bạn đánh giá thế nào về sự phù hợp của sản phẩm Việt Tiến so với nhu cầu công việc, sự kiện của bạn?"].unique()
-
-    print(len(check))
-    print(check)
 
     df.to_csv('output.csv', index=False)
