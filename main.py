@@ -6,8 +6,8 @@ import DinhDangChu
 
 
 def cot_1(values):
-    return values.apply(lambda x: '0' if isinstance(x, float) and str(x) == 'nan' else (
-        '0' if ' ' in str(x) else ('-1' if len(str(x)) > 2 else '1')
+    return values.apply(lambda x: 'tùy thuộc vào mức tăng giá' if isinstance(x, float) and str(x) == 'tùy thuộc vào mức tăng giá' else (
+        'tùy thuộc vào mức tăng giá' if ' ' in str(x) else ('không' if len(str(x)) > 2 else 'có')
     ))
 
 # chú ý: dấu – khách với dâu -
