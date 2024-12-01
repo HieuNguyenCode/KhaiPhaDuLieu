@@ -72,7 +72,6 @@ def cot_3(values):
 
 def cot_4(values, result, check):
     def process_value(value):
-        #
         if len(value) != 0 and value not in check:
             value = result
 
@@ -83,12 +82,22 @@ def cot_4(values, result, check):
 
 def cot_5(values):
     def process_value(value):
-        if value == 'nan':
+        if value == '':
             return ''
+        if 'bình thường' in value:
+            return 'bình thường'
+        if 'r' in value or 'ấ' in value or 't' in value:
+            if 'k' in value or 'ô' in value or 'n' in value or 'g' in value:
+                return 'rất không phù hợp'
+            else:
+                return 'rất phù hợp'
+        else:
+            if 'k' in value or 'ô' in value or 'n' in value or 'g' in value:
+                return 'không phù hợp'
+            else:
+                return 'phù hợp'
 
-        return value
-
-    return process_value(values)
+    return values.apply(process_value)
 
 
 if __name__ == '__main__':
