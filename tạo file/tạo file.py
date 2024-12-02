@@ -7,7 +7,7 @@ questions = [
     ("Thời điểm nào trong ngày bạn mua hàng nhiều nhất?", ["0-1h", "6 – 7h", "11-12h", "17-18h", "21-23h"]),
     ("Bạn quan tâm đến loại sản phẩm nào?", ["Đồng phục", "Thời trang công sở", "Phụ kiện thời trang"]),
     ("Bạn thường mua sản phẩm ở đâu?", ["Facebook", "Tiktok", "Sàn thương mại điện tử", "Khác: ………………"]),
-    ("Bạn thường dành bao nhiêu thời gian trong ngày để sử dụng mạng xã hội?", ["1 tiếng", "2 tiếng", "3 tiếng", "Khác: ………………"]),
+    ("Bạn thường dành bao nhiêu thời gian trong ngày để sử dụng mạng xã hội?", ["1 tiếng", "2 tiếng", "3 tiếng", "4 tiếng", "5 tiếng", "6 tiếng", "7 tiếng", "8 tiếng"]),
     ("Thời gian rảnh bạn thường sử dụng mạng xã hội nào?", ["Facebook", "Tiktok", "Sàn thương mại điện tử", "Khác: ………………"]),
     ("Bạn thường quan tâm đến sản phẩm nào của Việt Tiến?", ["ves", "Thời trang công sở", "Phụ kiện (giầy da, thất lưng, ví,…)"]),
     ("Bạn thường mua hàng quan tâm đến điều gì?", ["Chất lượng sản phẩm", "Giá thành", "Thương hiệu", "Khác: ………"]),

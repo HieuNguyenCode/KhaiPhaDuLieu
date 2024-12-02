@@ -20,6 +20,6 @@ if __name__ == '__main__':
     for column in df.columns:
         df[column] = df[column].apply(lambda x: add_noise_to_string(str(x), noise_level=0.2))
         if df[column].dtype == 'object' or df[column].dtype == 'int64' or df[column].dtype == 'float64':
-            df[column] = randomly_missing_data(df[column], missing_probability=0.1)
+            df[column] = randomly_missing_data(df[column], missing_probability=0.05)
 
     df.to_csv('../file_nhieu.csv', index=False)
