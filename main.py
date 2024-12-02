@@ -5,10 +5,15 @@ import pandas as pd
 import DinhDangChu
 
 
+# Phân tích dữ liệu để đưa ra chiến lược kinh doanh của công ty
+# thời trang Việt Tiến
+
 def cot_1(values):
-    return values.apply(lambda x: 'tùy thuộc vào mức tăng giá' if isinstance(x, float) and str(x) == 'tùy thuộc vào mức tăng giá' else (
-        'tùy thuộc vào mức tăng giá' if ' ' in str(x) else ('không' if len(str(x)) > 2 else 'có')
-    ))
+    return values.apply(
+        lambda x: 'tùy thuộc vào mức tăng giá' if isinstance(x, float) and str(x) == 'tùy thuộc vào mức tăng giá' else (
+            'tùy thuộc vào mức tăng giá' if ' ' in str(x) else ('không' if len(str(x)) > 2 else 'có')
+        ))
+
 
 # chú ý: dấu – khách với dâu -
 def cot_2(values):
@@ -34,16 +39,17 @@ def cot_2(values):
             value = '11-12'
         elif '-18' in value or '17-' in value:
             value = '17-18'
-        elif '-23' in value or '22-' in value:
-            value = '22-23'
+        elif '-23' in value or '21-' in value:
+            value = '21-23'
         elif '11-' in value:
             value = '11-12'
         elif '21-' in value:
-            value = '21-22'
+            value = '21-23'
 
         return value
 
     return values.apply(process_value)
+
 
 def cot_3(values):
     def process_value(value):
@@ -67,6 +73,7 @@ def cot_3(values):
 
     return values.apply(process_value)
 
+
 def cot_4(values, result, check):
     def process_value(value):
         if len(value) != 0 and value not in check:
@@ -75,6 +82,7 @@ def cot_4(values, result, check):
         return value
 
     return values.apply(process_value)
+
 
 def cot_5(values):
     def process_value(value):
@@ -104,12 +112,19 @@ if __name__ == '__main__':
     for column in df.columns:
         df[column] = df[column].str.lower()
 
+    # Bạn có sẵn lòng trả giá cao hơn để mua sản phẩm của Việt Tiến nếu chất lượng cải thiện không?
     df["Bạn có sẵn lòng trả giá cao hơn để mua sản phẩm của Việt Tiến nếu chất lượng cải thiện không?"] = cot_1(
         df["Bạn có sẵn lòng trả giá cao hơn để mua sản phẩm của Việt Tiến nếu chất lượng cải thiện không?"])
 
+    # Thời điểm nào trong ngày bạn mua hàng nhiều nhất?
     df["Thời điểm nào trong ngày bạn mua hàng nhiều nhất?"] = cot_2(
         df["Thời điểm nào trong ngày bạn mua hàng nhiều nhất?"])
 
+    df['Thời điểm nào trong ngày bạn mua hàng nhiều nhất?'] = df[
+        'Thời điểm nào trong ngày bạn mua hàng nhiều nhất?'].replace(['', None], df[
+        'Thời điểm nào trong ngày bạn mua hàng nhiều nhất?'].mode()[0])
+
+    # Bạn quan tâm đến loại sản phẩm nào?
     df["Bạn quan tâm đến loại sản phẩm nào?"] = DinhDangChu.DinhDang(df["Bạn quan tâm đến loại sản phẩm nào?"],
                                                                      ["đồng phục", "thời trang công sở",
                                                                       "phụ kiện thời trang"])
@@ -229,4 +244,10 @@ if __name__ == '__main__':
             'Bạn cảm nhận thế nào về chất lượng dịch vụ (chăm sóc khách hàng sau và trước bán hàng) của Việt Tiến so với nhãn hàng khác?'],
         ['rất tốt', 'Không sử dụng dịch vụ hậu mãi', 'tương đương', 'kém hơn'])
 
+    statistics = df.describe(include='all')
+
+    for column in df.select_dtypes(include='object').columns:
+        value_counts = df[column].value_counts(normalize=True)
+        print(f"Tỷ lệ phần trăm cho cột '{column}':")
+        print(value_counts)
     df.to_csv('output.csv', index=False)
