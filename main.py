@@ -87,7 +87,8 @@ def cot_4(values, result, check):
 
 def cot_5(values):
     def process_value(value):
-        if value == '':
+        value = str(value)
+        if value == 'nan':
             return ''
         if 'bình thường' in value:
             return 'bình thường'
@@ -108,9 +109,13 @@ def cot_5(values):
 def cot_6(values):
     def process_value(value):
         value = str(value)
-        if value == 'nan':
+        if value == '':
             return ''
-        return value
+        if value.count(" ") <= 2:
+            return DinhDangChu.DinhDang(pd.Series([value]), ['kém hơn', 'tốt hơn', 'tương đương']).iloc[0]
+        else:
+            return "Không sử dụng dịch vụ hậu mãi"
+
     return values.apply(process_value)
 
 if __name__ == '__main__':
@@ -425,6 +430,11 @@ if __name__ == '__main__':
         'Bạn cảm nhận thế nào về chất lượng dịch vụ (chăm sóc khách hàng sau và trước bán hàng) của Việt Tiến so với nhãn hàng khác?'] = cot_6(
         df[
             'Bạn cảm nhận thế nào về chất lượng dịch vụ (chăm sóc khách hàng sau và trước bán hàng) của Việt Tiến so với nhãn hàng khác?'])
+
+    df['Bạn cảm nhận thế nào về chất lượng dịch vụ (chăm sóc khách hàng sau và trước bán hàng) của Việt Tiến so với nhãn hàng khác?'] = df[
+        'Bạn cảm nhận thế nào về chất lượng dịch vụ (chăm sóc khách hàng sau và trước bán hàng) của Việt Tiến so với nhãn hàng khác?'].replace(['', None],
+                                                             df['Bạn cảm nhận thế nào về chất lượng dịch vụ (chăm sóc khách hàng sau và trước bán hàng) của Việt Tiến so với nhãn hàng khác?'].replace('',
+                                                                                                                     None).value_counts().idxmin())
 
     statistics = df.describe(include='all')
 
