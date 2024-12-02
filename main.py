@@ -118,6 +118,18 @@ def cot_6(values):
 
     return values.apply(process_value)
 
+def cot_7(values):
+    def process_value(value):
+        value = str(value)
+        if value == '':
+            return ''
+        if value.count(" ") <= 5:
+            return DinhDangChu.DinhDang(pd.Series([value]), ['có, một chút', 'không, kém hấp dẫn hơn', 'không, tương đương', 'có, rất hấp dẫn']).iloc[0]
+        else:
+            return "không theo dõi chương trình khuyến mãi"
+
+    return values.apply(process_value)
+
 if __name__ == '__main__':
     df = pd.read_csv("file_nhieu.csv")
 
@@ -417,13 +429,18 @@ if __name__ == '__main__':
 
     # Bạn có thấy các chương trình khuyến mãi của các nhãn hàng khác hấp dẫn hơn so với Việt Tiến không?
     df[
-        'Bạn có thấy các chương trình khuyến mãi của các nhãn hàng khác hấp dẫn hơn so với Việt Tiến không?'] = DinhDangChu.DinhDang(
-        df['Bạn có thấy các chương trình khuyến mãi của các nhãn hàng khác hấp dẫn hơn so với Việt Tiến không?'],
-        ['có, một chút', 'có, rất hấp dẫn', 'không, tương đương',
-         'không, kém hấp dẫn hơn', 'không theo dõi chương trình khuyến mãi'])
+        'Bạn có thấy các chương trình khuyến mãi của các nhãn hàng khác hấp dẫn hơn so với Việt Tiến không?'] = cot_7(df['Bạn có thấy các chương trình khuyến mãi của các nhãn hàng khác hấp dẫn hơn so với Việt Tiến không?'])
 
 
+    df['Bạn có thấy các chương trình khuyến mãi của các nhãn hàng khác hấp dẫn hơn so với Việt Tiến không?'] = cot_4(df['Bạn có thấy các chương trình khuyến mãi của các nhãn hàng khác hấp dẫn hơn so với Việt Tiến không?'], 'có, rất hấp dẫn', ['không, kém hấp dẫn hơn', 'không, tương đương', 'có, một chút', 'không theo dõi chương trình khuyến mãi'])
 
+    df['Bạn có thấy các chương trình khuyến mãi của các nhãn hàng khác hấp dẫn hơn so với Việt Tiến không?'] = df[
+        'Bạn có thấy các chương trình khuyến mãi của các nhãn hàng khác hấp dẫn hơn so với Việt Tiến không?'].replace(
+        ['', None],
+        df[
+            'Bạn có thấy các chương trình khuyến mãi của các nhãn hàng khác hấp dẫn hơn so với Việt Tiến không?'].replace(
+            '',
+            None).value_counts().idxmin())
 
     # Bạn cảm nhận thế nào về chất lượng dịch vụ (chăm sóc khách hàng sau và trước bán hàng) của Việt Tiến so với nhãn hàng khác?
     df[
