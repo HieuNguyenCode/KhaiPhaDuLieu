@@ -6,9 +6,6 @@ import pandas as pd
 import DinhDangChu
 
 
-# Phân tích dữ liệu để đưa ra chiến lược kinh doanh của công ty
-# thời trang Việt Tiến
-
 def cot_1(values):
     return values.apply(
         lambda x: 'tùy thuộc vào mức tăng giá' if isinstance(x, float) and str(x) == 'tùy thuộc vào mức tăng giá' else (
