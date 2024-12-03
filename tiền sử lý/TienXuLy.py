@@ -459,4 +459,4 @@ if __name__ == '__main__':
         value_counts = df[column].value_counts(normalize=True)
         print(f"Tỷ lệ phần trăm cho cột '{column}':")
         print(value_counts)
-    df.to_csv('output.csv', index=False)
+    df.to_csv('../output.csv', index=False)
