@@ -148,7 +148,8 @@ if __name__ == '__main__':
     # Bạn quan tâm đến loại sản phẩm nào?
     df["Bạn quan tâm đến loại sản phẩm nào?"] = DinhDangChu.DinhDang(df["Bạn quan tâm đến loại sản phẩm nào?"],
                                                                      ["đồng phục", "thời trang công sở",
-                                                                      "phụ kiện thời trang"])
+                                                                      "phụ kiện thời trang",
+                                                                      'ves'])
 
     df['Bạn quan tâm đến loại sản phẩm nào?'] = df[
         'Bạn quan tâm đến loại sản phẩm nào?'].replace(['', None], df[
@@ -189,7 +190,7 @@ if __name__ == '__main__':
     # Bạn thường quan tâm đến sản phẩm nào của Việt Tiến?
     df['Bạn thường quan tâm đến sản phẩm nào của Việt Tiến?'] = DinhDangChu.DinhDang(
         df['Bạn thường quan tâm đến sản phẩm nào của Việt Tiến?'],
-        ['ves', 'thời trang công sở', 'phụ kiện (giầy da, thất lưng, ví,…)'])
+        ['ves', 'thời trang công sở', 'phụ kiện thời trang', 'đồng phục'])
 
     df['Bạn thường quan tâm đến sản phẩm nào của Việt Tiến?'] = df[
         'Bạn thường quan tâm đến sản phẩm nào của Việt Tiến?'].replace(['', None], df[
